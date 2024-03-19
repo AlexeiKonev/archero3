@@ -19,7 +19,7 @@ public class DistanceCalculator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Target();
     }
 
     public void Target()

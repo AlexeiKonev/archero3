@@ -14,10 +14,10 @@ public class Bullet : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void Update()
-    {
+    //private void Update()
+    //{
         
-    }
+    //}
     private void Reload( )
     {
         this.transform.position = startPosition.position;

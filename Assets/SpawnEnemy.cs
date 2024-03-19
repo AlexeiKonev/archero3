@@ -15,10 +15,10 @@ public class SpawnEnemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
         
-    }
+    //}
     public void DoSpawnEnemy()
     {
         enemy1.transform.position = spawnPool[Random.Range(0, spawnPool.Length - 1 )].position;
