@@ -23,5 +23,8 @@ public class SpawnEnemy : MonoBehaviour
     {
         enemy1.transform.position = spawnPool[Random.Range(0, spawnPool.Length - 1 )].position;
         enemy1.gameObject.SetActive(true);
+
+        enemy2.transform.position = spawnPool[Random.Range(0, spawnPool.Length - 1 )].position;
+        enemy2.gameObject.SetActive(true);
     }
 }
