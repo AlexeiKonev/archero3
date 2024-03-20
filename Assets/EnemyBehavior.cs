@@ -10,7 +10,7 @@ public class EnemyBehavior : MonoBehaviour
 
     void Start()
     {
-
+        DistanceCalculatorEnemy.OnAtack += Move;
     }
     private void Move()
     {
@@ -21,15 +21,15 @@ public class EnemyBehavior : MonoBehaviour
         Debug.Log($"Player is attacked  of {transform.gameObject.name}");
         anim.SetTrigger("attack");
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            target = other.gameObject.transform;
-            Debug.Log($"Player is target for{transform.gameObject.name}");
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("Player"))
+    //    {
+    //        target = other.gameObject.transform;
+    //        Debug.Log($"Player is target for{transform.gameObject.name}");
 
-            Move();
-        }
+    //        Move();
+    //    }
 
-    }
+    //}
 }

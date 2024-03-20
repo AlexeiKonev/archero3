@@ -1,0 +1,147 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using DG.Tweening;
+
+public class Bullet : MonoBehaviour
+{
+  public  Transform startPosition;
+
+  public  Transform target;
+  private  void Start()
+    {
+        Move();
+    }
+
+    // Update is called once per frame
+    //private void Update()
+    //{
+        
+    //}
+    private void Reload( )
+    {
+        this.transform.position = startPosition.position;
+        Move();
+    }
+    private void Move()
+    {
+        transform.DOMove(target.position, 2)
+            .OnComplete(Reload);
+    }
+}
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DistanceCalculator : MonoBehaviour
+{
+   public Bullet bullet;
+   public Transform enemyOther;
+    
+
+    public Transform player;
+
+    public Transform targetCurent;
+    void Start()
+    {
+        targetCurent =  bullet.target;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Target();
+    }
+
+    public void Target()
+    {
+        //if distance to target more than to other enemy, change target
+        if (Calculate(targetCurent) > Calculate(enemyOther))
+        {
+            SwitchTarget();
+        }
+    }
+
+    public float Calculate(Transform tr)
+    {
+        float dist = Vector3.Distance(tr.position, player.transform.position);
+        print("Distance to other: " + dist);
+        return dist;
+    }
+    void SwitchTarget()
+    {
+         var  enemy = targetCurent;
+
+        targetCurent = enemyOther;
+
+        enemyOther = enemy;
+
+        bullet.target= targetCurent;
+
+    }
+}
+using DG.Tweening;
+using UnityEngine;
+
+public class EnemyBehavior : MonoBehaviour
+{
+
+    public Transform target = null;
+
+    public Animator anim;
+
+    void Start()
+    {
+
+    }
+    private void Move()
+    {
+        transform.DOMove(target.position, 2).OnComplete(Attack);
+    }
+    private void Attack()
+    {
+        Debug.Log($"Player is attacked  of {transform.gameObject.name}");
+        anim.SetTrigger("attack");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            target = other.gameObject.transform;
+            Debug.Log($"Player is target for{transform.gameObject.name}");
+
+            Move();
+        }
+
+    }
+}
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpawnEnemy : MonoBehaviour
+{
+    public Transform enemy1;
+    public Transform enemy2;
+
+    public Transform[] spawnPool;
+    void Start()
+    {
+
+        DoSpawnEnemy();
+    }
+
+    // Update is called once per frame
+    //void Update()
+    //{
+        
+    //}
+    public void DoSpawnEnemy()
+    {
+        enemy1.transform.position = spawnPool[Random.Range(0, spawnPool.Length - 1 )].position;
+        enemy1.gameObject.SetActive(true);
+
+        enemy2.transform.position = spawnPool[Random.Range(0, spawnPool.Length - 1 )].position;
+        enemy2.gameObject.SetActive(true);
+    }
+}
