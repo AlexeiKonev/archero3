@@ -8,6 +8,9 @@ public class Bullet : MonoBehaviour
   public  Transform startPosition;
 
   public  Transform target;
+
+  public int damage = 10;
+
   private  void Start()
     {
         Move();

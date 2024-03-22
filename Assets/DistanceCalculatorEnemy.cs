@@ -16,7 +16,7 @@ public class DistanceCalculatorEnemy : MonoBehaviour
     {
         if (Calculate(target) < distanceWarning)
         {
-            Debug.Log($"player captured;");
+            //Debug.Log($"player captured;");
             if (OnAtack != null)
             {
                 OnAtack.Invoke();

@@ -7,18 +7,20 @@ public class EnemyBehavior : MonoBehaviour
     public Transform target = null;
 
     public Animator anim;
+    public Vector3 offset = new Vector3(0,0,3);
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         DistanceCalculatorEnemy.OnAtack += Move;
     }
     private void Move()
     {
-        transform.DOMove(target.position, 2).OnComplete(Attack);
+        transform.DOMove(target.position , 2).OnComplete(Attack);
     }
     private void Attack()
     {
-        Debug.Log($"Player is attacked  of {transform.gameObject.name}");
+        //Debug.Log($"Player is attacked  of {transform.gameObject.name}");
         anim.SetTrigger("attack");
     }
     //private void OnTriggerEnter(Collider other)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,10 @@ public class DistanceCalculator : MonoBehaviour
 
     public Transform player;
 
-    public Transform targetCurent;
+    public   Transform targetCurent;
+
+    public static Action OnSwitchTarget;
+
     void Start()
     {
         targetCurent =  bullet.target;
@@ -34,7 +38,7 @@ public class DistanceCalculator : MonoBehaviour
     public float Calculate(Transform tr)
     {
         float dist = Vector3.Distance(tr.position, player.transform.position);
-        print("Distance to other: " + dist);
+        //print("Distance to other: " + dist);
         return dist;
     }
     void SwitchTarget()
@@ -46,6 +50,10 @@ public class DistanceCalculator : MonoBehaviour
         enemyOther = enemy;
 
         bullet.target= targetCurent;
+
+        transform.LookAt(  targetCurent);
+
+        OnSwitchTarget.Invoke();
 
     }
 }
